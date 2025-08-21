@@ -24,7 +24,7 @@ spec:
       containers:
         - name: kagenti-ui-container
           image: ghcr.io/kagenti/kagenti/ui:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8501
           resources:

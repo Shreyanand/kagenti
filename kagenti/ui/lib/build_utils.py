@@ -130,12 +130,9 @@ def _construct_tool_resource_body(
         return None
     st_object.info(f"Using GitHub username '{repo_user}' from secret for build.")
     #image_registry_prefix = f"ghcr.io/{repo_user}"
-    image_name = k8s_resource_name
-    if build_from_source:
-       image_registry_prefix = f"registry.cr-system.svc.cluster.local:5000"
-    else:
-       image_registry_prefix,image_name,tag =  parse_image_url(repo_url)
-
+    #image_registry_prefix = f"registry.cr-system.svc.cluster.local:5000"
+    #image_registry_prefix = f"image-registry.openshift-image-registry.svc:5000/kagenti-system"
+    image_registry_prefix = "quay.io/shanand"
     client_secret_for_env = _get_keycloak_client_secret(
         st_object, f"{k8s_resource_name}-client"
     )
@@ -311,13 +308,9 @@ def _construct_agent_resource_body(
         )
         return None
     st_object.info(f"Using GitHub username '{repo_user}' from secret for build.")
-
-    image_name = k8s_resource_name
-    if build_from_source:
-       image_registry_prefix = f"registry.cr-system.svc.cluster.local:5000"
-    else:
-       image_registry_prefix,image_name,tag =  parse_image_url(repo_url)
-
+    #image_registry_prefix = f"image-registry.openshift-image-registry.svc:5000/kagenti-system"
+    #image_registry_prefix = f"quay.io/shanand"
+    image_registry_prefix = "quay.io/shanand"
     client_secret_for_env = _get_keycloak_client_secret(
         st_object, f"{k8s_resource_name}-client"
     )

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kagenti-ui-builder
+  namespace: kagenti-system
+spec:
+  containers:
+  - name: builder
+    image: quay.io/podman/stable:latest
+    command: ["/bin/bash"]
+    args: ["-c", "sleep 3600"]
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+    - name: build-context
+      mountPath: /build
+    workingDir: /build
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+  - name: build-context
+    emptyDir: {}
+  restartPolicy: Never
